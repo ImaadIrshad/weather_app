@@ -9,17 +9,17 @@ const userLocation = process.argv[2]
 if (!userLocation) {
     console.log(' Please provide location name ')
 } else {
-    geocode(userLocation, (error,data) => {
+    geocode(userLocation, (error, {latitude, longitude, location} = {}) => {
         if (error) {
             return console.log(error)
         }
     
-        forecast(data.latitude, data.longitude, (error, forecastData) => {
+        forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error)
             }
     
-            console.log(data.location)
+            console.log(location)
             console.log(forecastData)
         })
     })
